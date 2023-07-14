@@ -13,6 +13,7 @@
       v-for="item in noChildren"
       :key="item.name"
       :index="item.name"
+      @click="clickMenu(item)"
     >
       <i :class="`el-icon-${item.icon}`"></i>
       <span slot="title">{{ item.label }}</span>
@@ -27,7 +28,9 @@
         <span slot="title">{{ item.label }}</span>
       </template>
       <el-menu-item-group v-for="subItem in item.children" :key="subItem.path">
-        <el-menu-item :index="subItem.path">{{ subItem.label }}</el-menu-item>
+        <el-menu-item @click="clickMenu(subItem)" :index="subItem.path">
+          {{ subItem.label }}
+        </el-menu-item>
       </el-menu-item-group>
     </el-submenu>
   </el-menu>
@@ -85,10 +88,18 @@
     },
     methods: {
       handleOpen(key, keyPath) {
-        console.log(key, keyPath)
+        // console.log(key, keyPath)
       },
       handleClose(key, keyPath) {
-        console.log(key, keyPath)
+        // console.log(key, keyPath)
+      },
+      clickMenu(item) {
+        if (
+          this.$route.path !== item.path &&
+          !(this.$route.path === '/home' && item.path === '/')
+        ) {
+          this.$router.push(item.path)
+        }
       },
     },
     computed: {
@@ -110,14 +121,13 @@
     width: 200px;
     min-height: 400px;
   }
-  .el-menu{
+  .el-menu {
     height: 100vh;
-    h3{
-        color: #ffff;
-        text-align: center;
-        line-height: 48px;
-        font-size: 16px;
+    h3 {
+      color: #ffff;
+      text-align: center;
+      line-height: 48px;
+      font-size: 16px;
     }
   }
-
 </style>
