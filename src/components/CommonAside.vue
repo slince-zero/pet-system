@@ -38,9 +38,9 @@
 
 <script>
   export default {
+    name: 'Aside',
     data() {
       return {
-        isCollapse: false,
         menuData: [
           {
             path: '/',
@@ -111,6 +111,9 @@
       // 有子菜单
       hasChildren() {
         return this.menuData.filter((item) => item.children)
+      },
+      isCollapse() {
+        return this.$store.state.tab.isCollapse
       },
     },
   }

@@ -5,7 +5,9 @@
         <CommonAsideVue />
       </el-aside>
       <el-container>
-        <el-header>Header</el-header>
+        <el-header>
+          <CommonHeaderVue />
+        </el-header>
         <el-main>
           <router-view></router-view>
         </el-main>
@@ -15,13 +17,19 @@
 </template>
 
 <script>
-  import CommonAsideVue from '@/components/CommonAside'
-  export default {
-    name: 'Main',
-    components: {
-      CommonAsideVue,
-    },
-  }
+import CommonAsideVue from "@/components/CommonAside";
+import CommonHeaderVue from "@/components/CommonHeader";
+export default {
+  name: "Main",
+  components: {
+    CommonAsideVue,
+    CommonHeaderVue,
+  },
+};
 </script>
 
-<style></style>
+<style>
+.el-header {
+  padding: 0;
+}
+</style>
