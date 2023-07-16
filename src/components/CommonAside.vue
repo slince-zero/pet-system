@@ -8,7 +8,7 @@
     background-color="#545c64"
     text-color="#fff"
   >
-    <h3>Pet 系统管理系统</h3>
+    <h3>{{ isCollapse ? 'Pet' : 'Pet 系统管理系统' }}</h3>
     <el-menu-item
       v-for="item in noChildren"
       :key="item.name"
@@ -112,6 +112,7 @@
       hasChildren() {
         return this.menuData.filter((item) => item.children)
       },
+      // 左侧菜单是否折叠
       isCollapse() {
         return this.$store.state.tab.isCollapse
       },
@@ -126,6 +127,7 @@
   }
   .el-menu {
     height: 100vh;
+    border-right: none;
     h3 {
       color: #ffff;
       text-align: center;
