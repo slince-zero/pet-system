@@ -43,7 +43,10 @@
             <!-- 柱状图 -->
             <div ref="echarts2" style="height: 260px"></div>
           </el-card>
-          <el-card style="height: 260px"></el-card>
+          <el-card style="height: 260px">
+            <!-- 饼状图 -->
+            <div ref="echarts3" style="height: 240px"></div>
+          </el-card>
         </div>
       </el-col>
     </el-row>
@@ -76,7 +79,7 @@
         // 指定图表的配置项和数据
         const echarts1Option = {}
         // 处理数据xAxis
-        const { orderData, userData } = data.data
+        const { orderData, userData, videoData } = data.data
         const xAxis = Object.keys(orderData.data[0])
         const xAxisData = {
           data: xAxis,
@@ -144,6 +147,30 @@
           ],
         }
         echarts2.setOption(echarts2Option)
+
+        // 饼状图
+        const echarts3 = echarts.init(this.$refs.echarts3)
+        const echarts3Option = {
+          tooltip: {
+            trigger: 'item',
+          },
+          color: [
+            '#0f78f4',
+            '#dd536b',
+            '#9462e5',
+            '#ce4548',
+            '#e1bb22',
+            '#39c362',
+            '#3ed1cf',
+          ],
+          series: [
+            {
+              data: videoData,
+              type: 'pie',
+            },
+          ],
+        }
+        echarts3.setOption(echarts3Option)
       })
     },
   }

@@ -38,7 +38,7 @@ export default {
                     },
                     {
                         name: '橘猫4号',
-                        value: 60
+                        value: 40
                     },
                 ],
                 // 柱状图
