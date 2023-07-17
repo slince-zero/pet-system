@@ -45,33 +45,34 @@ export default {
                 userData: [
                     {
                         date: '周一',
-                        new: 5,
-                        active: 200
+                        new: 13,
+                        active: 140
                     },
                     {
                         date: '周二',
-                        new: 5,
-                        active: 200
+                        new: 28,
+                        active: 66
                     },
                     {
                         date: '周三',
-                        new: 5,
-                        active: 200
+                        new: 37,
+                        active: 100
                     },
                     {
                         date: '周四',
-                        new: 5,
-                        active: 200
+                        new: 50,
+                        active: 10
                     },
                     {
                         date: '周五',
-                        new: 5,
-                        active: 200
+                        new: 20,
+                        active: 99
                     },
                 ],
                 // 折线图
                 orderData: {
-                    date: ['20231001', '20231002', '20231003', '20231004', '20231005', '20231006', '20231007']
+                    date: ['20231001', '20231002', '20231003', '20231004', '20231005', '20231006', '20231007'],
+                    data: List
                 },
                 // 首页左侧表格信息
                 tableData: [

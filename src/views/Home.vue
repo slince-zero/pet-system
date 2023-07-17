@@ -39,7 +39,10 @@
           <div ref="echarts1" style="height: 280px"></div>
         </el-card>
         <div class="graph">
-          <el-card style="height: 260px"></el-card>
+          <el-card style="height: 260px">
+            <!-- 柱状图 -->
+            <div ref="echarts2" style="height: 260px"></div>
+          </el-card>
           <el-card style="height: 260px"></el-card>
         </div>
       </el-col>
@@ -67,29 +70,80 @@
         const { tableData } = data.data
         this.tableData = tableData
 
+        // 折线图
         // 基于准备好的dom，初始化echarts实例
         const echarts1 = echarts.init(this.$refs.echarts1)
         // 指定图表的配置项和数据
         const echarts1Option = {}
         // 处理数据xAxis
-        const { orderData } = data.data
-        console.log(orderData);
-        const xAxis = Object.keys(orderData.date[0])
+        const { orderData, userData } = data.data
+        const xAxis = Object.keys(orderData.data[0])
         const xAxisData = {
           data: xAxis,
         }
         echarts1Option.xAxis = xAxisData
         echarts1Option.yAxis = {}
         echarts1Option.legend = xAxisData
-        echarts1Option.series=[]
+        echarts1Option.series = []
         xAxis.forEach((key) => {
           echarts1Option.series.push({
             name: key,
-            data: orderData.date.map((item) => item[key]),
+            data: orderData.data.map((item) => item[key]),
             type: 'line',
           })
         })
         echarts1.setOption(echarts1Option)
+
+        // 柱状图
+        const echarts2 = echarts.init(this.$refs.echarts2)
+        const echarts2Option = {
+          legend: {
+            // 图例文字颜色
+            textStyle: {
+              color: '#333',
+            },
+          },
+          grid: {
+            left: '20%',
+          },
+          // 提示框
+          tooltip: {
+            trigger: 'axis',
+          },
+          xAxis: {
+            type: 'category',
+            data: userData.map((item) => item.date),
+            axisLine: {
+              lineStyle: {
+                color: '#17b3a3',
+              },
+            },
+          },
+          yAxis: [
+            {
+              type: 'value',
+              axisLine: {
+                lineStyle: {
+                  color: '#17b3a3',
+                },
+              },
+            },
+          ],
+          color: ['#2ec7c9', '#b6a2de'],
+          series: [
+            {
+              name: '新来的🐱',
+              data: userData.map((item) => item.new),
+              type: 'bar',
+            },
+            {
+              name: '活跃的🐱',
+              data: userData.map((item) => item.active),
+              type: 'bar',
+            },
+          ],
+        }
+        echarts2.setOption(echarts2Option)
       })
     },
   }
