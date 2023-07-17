@@ -1,7 +1,7 @@
 <template>
   <div>
     <el-row>
-      <el-col :span="8">
+      <el-col :span="8" style="padding-right: 10px">
         <!-- 头像显示 -->
         <el-card class="box-card">
           <div class="user">
@@ -33,49 +33,64 @@
           </el-table>
         </el-card>
       </el-col>
-      <el-col :span="24"></el-col>
+      <el-col :span="16" style="padding-left: 10px">
+        <el-card style="height: 280px">
+          <!-- 折线图 -->
+          <div ref="echarts1" style="height: 280px"></div>
+        </el-card>
+        <div class="graph">
+          <el-card style="height: 260px"></el-card>
+          <el-card style="height: 260px"></el-card>
+        </div>
+      </el-col>
     </el-row>
   </div>
 </template>
 
 <script>
+  import { getData } from '../api'
+  import * as echarts from 'echarts'
   export default {
     name: 'Home',
     data() {
       return {
-        tableData: [
-          {
-            date: '2016-05-02',
-            name: '橘猫',
-            address: '北京市第二大街333号',
-          },
-          {
-            date: '2016-05-04',
-            name: '狸花猫',
-            address: '北京市第二大街333号',
-          },
-          {
-            date: '2016-05-01',
-            name: '牛奶猫',
-            address: '北京市第二大街333号',
-          },
-          {
-            date: '2016-05-03',
-            name: '蓝猫',
-            address: '北京市第二大街333号',
-          },
-          {
-            date: '2016-05-03',
-            name: '红猫',
-            address: '北京市第二大街333号',
-          },
-        ],
+        tableData: [],
         tableLabel: {
           date: '日期',
           name: '猫名',
           address: '地址',
         },
       }
+    },
+    mounted() {
+      getData().then(({ data }) => {
+        const { tableData } = data.data
+        this.tableData = tableData
+
+        // 基于准备好的dom，初始化echarts实例
+        const echarts1 = echarts.init(this.$refs.echarts1)
+        // 指定图表的配置项和数据
+        const echarts1Option = {}
+        // 处理数据xAxis
+        const { orderData } = data.data
+        console.log(orderData);
+        const xAxis = Object.keys(orderData.date[0])
+        const xAxisData = {
+          data: xAxis,
+        }
+        echarts1Option.xAxis = xAxisData
+        echarts1Option.yAxis = {}
+        echarts1Option.legend = xAxisData
+        echarts1Option.series=[]
+        xAxis.forEach((key) => {
+          echarts1Option.series.push({
+            name: key,
+            data: orderData.date.map((item) => item[key]),
+            type: 'line',
+          })
+        })
+        echarts1.setOption(echarts1Option)
+      })
     },
   }
 </script>
@@ -114,6 +129,15 @@
         color: #999;
         margin-left: 60px;
       }
+    }
+  }
+
+  .graph {
+    margin-top: 20px;
+    display: flex;
+    justify-content: space-between;
+    .el-card {
+      width: 48%;
     }
   }
 </style>
