@@ -300,12 +300,12 @@
     }
     .el-card {
       width: 32%;
-      margin-bottom: 20px;
+      margin-bottom: 10px;
     }
   }
 
   .graph {
-    margin-top: 20px;
+    margin-top: 10px;
     display: flex;
     justify-content: space-between;
     .el-card {
