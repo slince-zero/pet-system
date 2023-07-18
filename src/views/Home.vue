@@ -280,9 +280,11 @@
       text-align: center;
       line-height: 80px;
       color: #fff;
+      margin-top: 20px;
+      margin-left: 20px;
     }
     .detail {
-      margin-left: 15px;
+      margin-left: 35px;
       display: flex;
       flex-direction: column;
       justify-content: center;
