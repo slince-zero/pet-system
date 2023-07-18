@@ -31,13 +31,13 @@
       },
       // 删除tag
       handelClose(item, index) {
-        console.log(item);
+        console.log(item)
         this.closeTag(item)
         const length = this.tags.length - 1
 
         if (item.name === 'home') {
           this.$router.push({
-            name:'home'
+            name: 'home',
           })
         }
 
@@ -63,7 +63,8 @@
 
 <style lang="less" scoped>
   .tabs {
-    padding: 20px;
+    // margin-top: 20px;
+    margin: 5px;
     .el-tag {
       margin-right: 15px;
       cursor: pointer;

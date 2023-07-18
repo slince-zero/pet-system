@@ -8,7 +8,7 @@
         <el-header>
           <CommonHeaderVue />
         </el-header>
-        <CommonTag/>
+        <CommonTag />
         <el-main>
           <router-view></router-view>
         </el-main>
@@ -34,5 +34,8 @@
 <style>
   .el-header {
     padding: 0;
+  }
+  .el-main {
+    margin-top: -20px;
   }
 </style>
