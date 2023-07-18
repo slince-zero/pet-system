@@ -5,12 +5,16 @@
         @click="handleMenu"
         icon="el-icon-menu"
         size="mini"
+        style="margin-right: 20px"
       ></el-button>
+      <!-- 面包屑 -->
       <el-breadcrumb separator="/">
-        <el-breadcrumb-item :to="{ path: '/' }">首页</el-breadcrumb-item>
-        <el-breadcrumb-item>活动管理</el-breadcrumb-item>
-        <el-breadcrumb-item>活动列表</el-breadcrumb-item>
-        <el-breadcrumb-item>活动详情</el-breadcrumb-item>
+        <el-breadcrumb-item
+          v-for="item in tags"
+          :key="item.path"
+          :to="{ path: item.path }"
+          >{{ item.label }}</el-breadcrumb-item
+        >
       </el-breadcrumb>
     </div>
     <div class="r-content">
@@ -26,12 +30,21 @@
 </template>
 
 <script>
+  import { mapState } from 'vuex'
   export default {
     name: 'Header',
     methods: {
       handleMenu() {
         this.$store.commit('collapseMenu')
       },
+    },
+    computed: {
+      ...mapState({
+        tags: (state) => state.tab.tabsList,
+      }),
+    },
+    mounted() {
+      console.log(this.tags)
     },
   }
 </script>
@@ -59,6 +72,26 @@
         height: 50px;
         border-radius: 50%;
       }
+    }
+
+    .l-content {
+      display: flex;
+      align-items: center;
+      border-radius: 50%;
+      /deep/.el-breadcrumb__item {
+        .el-breadcrumb__inner {
+          font-weight: normal;
+          &.is-link {
+            color: #666;
+          }
+        }
+        &:last-child {
+          .el-breadcrumb__inner {
+            color: #fff;
+          }
+        }
+      }
+      
     }
   }
 </style>
