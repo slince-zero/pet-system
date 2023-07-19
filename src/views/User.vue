@@ -48,7 +48,7 @@
       <el-button type="text" @click="handleAdd">+ 新增</el-button>
     </div>
 
-    <el-table :data="tableData" style="width: 100%">
+    <el-table height="90%" :data="tableData" style="width: 100%">
       <el-table-column prop="name" label="姓名"> </el-table-column>
       <el-table-column prop="sex" label="性别">
         <template slot-scope="scope">
@@ -202,4 +202,8 @@
   }
 </script>
 
-<style></style>
+<style lang="less" scoped>
+.manage{
+  height: 90%
+}
+</style>
