@@ -48,9 +48,20 @@
     </div>
 
     <el-table :data="tableData" style="width: 100%">
-      <el-table-column prop="date" label="日期" width="180"> </el-table-column>
-      <el-table-column prop="name" label="姓名" width="180"> </el-table-column>
-      <el-table-column prop="address" label="地址"> </el-table-column>
+      <el-table-column prop="name" label="姓名"> </el-table-column>
+      <el-table-column prop="sex" label="性别">
+        <template slot-scope="scope">
+          <span>{{ scope.row.sex == 1 ? '男' : '女' }}</span>
+        </template>
+      </el-table-column>
+      <el-table-column prop="age" label="年龄"> </el-table-column>
+      <el-table-column prop="birth" label="出生日期"> </el-table-column>
+      <el-table-column prop="addr" label="地址">
+        <template slot-scope="scope">
+          <el-button size="mini" @click="handleEdit(scope.row)">编辑</el-button>
+          <el-button type="danger" size="mini" @click="handleDelete(scope.row)">删除</el-button>
+        </template>
+      </el-table-column>
     </el-table>
   </div>
 </template>
@@ -124,10 +135,21 @@
         this.handleClose()
         this.dialogVisible = false
       },
+
+      // 编辑用户
+      handleEdit(){
+
+      },
+
+      // 删除用户
+      handleDelete(){
+
+      }
     },
     mounted() {
       getUser().then(({ data }) => {
-        console.log(data)
+        // console.log(data)
+        this.tableData = data.list
       })
     },
   }

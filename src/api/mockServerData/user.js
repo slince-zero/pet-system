@@ -24,7 +24,7 @@ for (let i = 0; i < count; i++) {
     Mock.mock({
       id: Mock.Random.guid(),
       name: Mock.Random.cname(),
-      addr: Mock.mock('@country(true)'),
+      addr: Mock.mock('@city(true)'),
       'age|18-69': 1,
       birth: Mock.Random.date(),
       sex: Mock.Random.integer(0, 1),
@@ -35,7 +35,7 @@ for (let i = 0; i < count; i++) {
 export default {
   // 获取用户列表
   getUserList: (config) => {
-    const { name, page = 1, limit = 20 } = param2Obj(config.url)
+    const { name, page = 1, limit = 15 } = param2Obj(config.url)
     console.log(name, page, limit)
     const mockList = List.filter((user) => {
       if (
