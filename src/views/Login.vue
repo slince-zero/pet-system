@@ -19,13 +19,15 @@
         ></el-input>
       </el-form-item>
       <el-form-item>
-        <el-button type="primary">登录</el-button>
+        <el-button type="primary" @click="submit">登录</el-button>
       </el-form-item>
     </el-form>
   </div>
 </template>
 
 <script>
+  import Mock from 'mockjs'
+  import Cookie from 'js-cookie'
   export default {
     name: 'Login',
     data() {
@@ -44,6 +46,18 @@
         },
       }
     },
+    methods: {
+      // 登录
+      submit() {
+        // token 信息,用mock生成的随机数来模拟
+        const token = Mock.Random.guid()
+        console.log(token)
+        // 把token信息存入cookie
+        Cookie.set('token', token)
+        // 跳转首页
+        this.$router.push('/home')
+      },
+    },
   }
 </script>
 
@@ -61,11 +75,11 @@
       margin-bottom: 40px;
       color: #a5aaaf;
     }
-    .el-input{
-        width: 198px;
+    .el-input {
+      width: 198px;
     }
-    .el-button{
-        margin: 0 124px;
+    .el-button {
+      margin: 0 124px;
     }
   }
 </style>

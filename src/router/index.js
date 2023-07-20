@@ -6,7 +6,7 @@ import Main from '../views/Main'
 import Mail from '../views/Mail'
 import Page1 from '../views/Page1'
 import Page2 from '../views/Page2'
-import login from '../views/Login'
+import Login from '../views/Login'
 
 Vue.use(VueRouter)
 
@@ -56,7 +56,7 @@ const routes = [
     {
         path:'/login',
         name:'login',
-        component: login
+        component: Login
     }
 
 ]
